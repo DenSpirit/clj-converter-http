@@ -6,4 +6,5 @@
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [http-kit "2.3.0"]]
   :repl-options {:init-ns converter-http.core}
-  :main converter-http.core)
+  :main converter-http.core 
+  :aot :all)

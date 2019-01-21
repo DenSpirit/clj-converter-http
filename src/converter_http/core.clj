@@ -1,5 +1,6 @@
 (ns converter-http.core
-  (:require [org.httpkit.server :refer [run-server]]))
+  (:require [org.httpkit.server :refer [run-server]])
+  (:gen-class))
 
 (def convert-pattern #"/Convert\(\"([-+]?\d+)\", ?\"(\w+)\", ?\"(\w+)\"\)")
 
@@ -19,13 +20,13 @@
   :PUD->KG #(/ % 16.3804964)
   :KG->PUD #(* % 16.3804964)
   :KG->LB #(* % 0.453592)
-  ; distanses
+  ; distances
   :MI->M #(* % 1609.34)
   :MI->VER #((convert-map :M->VER) ((convert-map :MI->M) %))
   :M->MI #(/ % 1609.34)
   :M->VER #(/ % 1066.8)
   :VER->M #(* % 1066.8)
-  :VER->MI #((convert-map :VER->M) ((convert-map :M->MI) %))
+  :VER->MI #((convert-map :M->MI) ((convert-map :VER->M) %))
 })
 
 (defn to-keyword [from to] (keyword (clojure.string/upper-case (str from "->" to))))
